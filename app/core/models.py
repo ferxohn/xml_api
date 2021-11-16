@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
@@ -35,3 +36,28 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
+
+
+class CFDI(models.Model):
+    """CFDI object"""
+    fecha = models.DateTimeField()
+    uuid = models.CharField(max_length=36)
+    serie = models.CharField()
+    folio = models.CharField()
+    version = models.CharField()
+    lugar_expedicion = models.CharField(max_length=5)
+    metodo_pago = models.CharField(max_length=3)
+    tipo_comprobante = models.CharField(max_length=1)
+    moneda = models.CharField(max_length=3)
+    total = models.DecimalField(decimal_places=2)
+    subtotal = models.DecimalField(decimal_places=2)
+    forma_pago = models.CharField(max_length=2)
+    xml_path = models.FileField(upload_to='uploads/%Y/%m/%d/')
+    
+    def _str_(self):
+        return self.uuid
+
+class CFDIEmitido(CFDI):
+    RFC_Emisor = models.ForeignKey(
+        
+    )
