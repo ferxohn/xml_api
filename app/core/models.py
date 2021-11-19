@@ -42,22 +42,32 @@ class CFDI(models.Model):
     """CFDI object"""
     fecha = models.DateTimeField()
     uuid = models.CharField(max_length=36)
-    serie = models.CharField()
-    folio = models.CharField()
-    version = models.CharField()
+    serie = models.CharField(max_length=255)
+    folio = models.CharField(max_length=255, unique=True)
+    version = models.CharField(max_length=255)
     lugar_expedicion = models.CharField(max_length=5)
     metodo_pago = models.CharField(max_length=3)
     tipo_comprobante = models.CharField(max_length=1)
     moneda = models.CharField(max_length=3)
-    total = models.DecimalField(decimal_places=2)
-    subtotal = models.DecimalField(decimal_places=2)
+    total = models.DecimalField(max_digits=13, decimal_places=2)
+    subtotal = models.DecimalField(max_digits=13, decimal_places=2)
     forma_pago = models.CharField(max_length=2)
     xml_path = models.FileField(upload_to='uploads/%Y/%m/%d/')
     
     def _str_(self):
         return self.uuid
 
-class CFDIEmitido(CFDI):
-    RFC_Emisor = models.ForeignKey(
-        
-    )
+class CFDIIssued(CFDI):
+    RFC_emisor = models.CharField(max_length=13)
+    razon_social_emisor = models.CharField(max_length=255)
+    RFC_receptor = models.CharField(max_length=13)
+    razon_social_receptor = models.CharField(max_length=255)
+    #user = models.ForeignKey('User', on_delete=models.CASCADE)
+    #client = models.ForeignKey('Client', on_delete = models.CASCADE)
+
+class CFDIReceived(CFDI):
+    RFC_emisor = models.CharField(max_length=13)
+    razon_social_emisor = models.CharField(max_length=255)
+    RFC_receptor = models.CharField(max_length=13)
+    razon_social_receptor = models.CharField(max_length=255)
+    #client = models.ForeignKey('Client', on_delete = models.CASCADE)
