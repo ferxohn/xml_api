@@ -26,4 +26,5 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Client)
 admin.site.register(models.CFDIIssued)

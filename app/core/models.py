@@ -38,6 +38,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
 
 
+class Client(models.Model):
+    """RFC y razón social"""
+    rfc = models.CharField(max_length=255, unique=True)
+    razon_social = models.CharField(max_length=255, unique=True)
+
+
 class CFDI(models.Model):
     """CFDI object"""
     fecha = models.DateTimeField()
@@ -71,4 +77,3 @@ class CFDIReceived(CFDI):
     RFC_receptor = models.CharField(max_length=13)
     razon_social_receptor = models.CharField(max_length=255)
     #client = models.ForeignKey('Client', on_delete = models.CASCADE)
-
