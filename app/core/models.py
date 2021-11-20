@@ -35,3 +35,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
+
+
+class Client():
+    """RFC y razón social"""
+    rfc = models.CharField(max_length=255, unique=True)
+    razon_social = models.CharField(max_length=255, unique=True)
