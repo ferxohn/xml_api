@@ -71,3 +71,4 @@ class CFDIReceived(CFDI):
     RFC_receptor = models.CharField(max_length=13)
     razon_social_receptor = models.CharField(max_length=255)
     #client = models.ForeignKey('Client', on_delete = models.CASCADE)
+
