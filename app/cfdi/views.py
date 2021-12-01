@@ -13,6 +13,19 @@ class BaseCFDIAttrViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication, )
     permission_classes = (IsAuthenticated, )
 
+    def _params_to_ints(self, qs):
+        """Convert a list of strings to a list of integers"""
+        return [int(str_id) for str_id in qs.split(',')]
+
+    def get_queryset(self):
+        """Retrieve CFDIs for the selected client"""
+        client = self.request.query_params.get('client')
+        queryset = self.queryset
+        if client:
+            client_id = self._params_to_ints(client)
+            queryset = queryset.filter(client__id__in=client_id)
+        return queryset
+
 
 class CFDIIssuedViewSet(BaseCFDIAttrViewSet):
     "Manage issued CFDIs in the database"
