@@ -53,6 +53,5 @@ class CFDIReceivedSerializer(serializers.ModelSerializer):
             'subtotal',
             'forma_pago',
             'xml_path',
-            
         )
         read_only_fields = ('id', )

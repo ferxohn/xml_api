@@ -1,4 +1,3 @@
-import os
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
@@ -50,7 +49,7 @@ class Client(models.Model):
 class CFDIIssued(models.Model):
     rfc_receptor = models.CharField(max_length=13)
     razon_social_receptor = models.CharField(max_length=255)
-    client = models.ForeignKey(Client, on_delete = models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
     fecha = models.DateTimeField()
     uuid = models.CharField(max_length=36)
     serie = models.CharField(max_length=255)
@@ -64,14 +63,15 @@ class CFDIIssued(models.Model):
     subtotal = models.DecimalField(max_digits=13, decimal_places=2)
     forma_pago = models.CharField(max_length=2)
     xml_path = models.FileField(upload_to='uploads/%Y/%m/%d/')
-    
+
     def __str__(self):
         return self.uuid
+
 
 class CFDIReceived(models.Model):
     rfc_emisor = models.CharField(max_length=13)
     razon_social_emisor = models.CharField(max_length=255)
-    client = models.ForeignKey(Client, on_delete = models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
     fecha = models.DateTimeField()
     uuid = models.CharField(max_length=36)
     serie = models.CharField(max_length=255)
@@ -85,6 +85,6 @@ class CFDIReceived(models.Model):
     subtotal = models.DecimalField(max_digits=13, decimal_places=2)
     forma_pago = models.CharField(max_length=2)
     xml_path = models.FileField(upload_to='uploads/%Y/%m/%d/')
-    
+
     def __str__(self):
         return self.uuid

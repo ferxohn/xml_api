@@ -21,6 +21,6 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/', include('user.urls')),
-    path('api/client/',include('client.urls')),
+    path('api/client/', include('client.urls')),
     path('api/cfdi/', include('cfdi.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
